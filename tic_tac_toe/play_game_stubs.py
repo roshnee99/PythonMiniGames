@@ -17,7 +17,8 @@ BOARD VALUES:
 import random
 import time
 
-board = []
+# Define constants here
+
 x = "X"
 o = "O"
 blank = " "
@@ -36,8 +37,9 @@ def insert_token_to_board(letter, pos, possible_board):
     """
 
 
-def is_space_free(pos):
+def is_space_free(pos, board):
     """
+    :param board: Board on which to check if position is free
     :param pos: Place in board array to check
     :return: True if the space has no letter currently occupying the space
     """
@@ -59,22 +61,24 @@ def check_player_move_in_range(num):
     """
 
 
-def validate_move(string):
+def validate_move(string, board):
     """
     Takes in input string from player and sees the following conditions
     (1) Value is a number
     (2) Number is in range 1...9
     (3) Position on board is blank
+    :param board: The board player is making move on
     :param string: Given player choice, check if input is valid
     :return: True if valid move
     """
 
 
-def player_move():
+def player_move(board):
     """
     Accepts an input from the user (1, 2, 3...9) which is the space where they will place "X"
     Should continue to keep asking the user for a position if they didn't type it in properly
     (ex. if they type in 10, that is not a valid position, or if the space was already occupied)
+    @:param board: The board player will be making a move against
     :return: None
     """
 
@@ -87,9 +91,10 @@ def choose_random_position(possible_moves):
     """
 
 
-def get_empty_positions():
+def get_empty_positions(board):
     """
     Finds all the empty positions in the board
+    @:param: board that game is being hosted on
     :return: positions that are blank
     """
 
@@ -110,7 +115,7 @@ def get_possible_middle(possible_moves):
     """
 
 
-def computer_move_intelligent():
+def computer_move(board):
     """
     The algorithm for this is simple
     (0) Find all possible empty positions in the board
@@ -120,13 +125,28 @@ def computer_move_intelligent():
     (4) Choose a corner move. If multiple available, choose at random
     (5) Choose the center
     (6) Otherwise return a random move
+    @:param board: The board computer is choosing a move from
     :return: the position the computer is moving into (0 if no possible moves)
     """
+    # Get all possible moves
+
+    # if board is empty, then it's a tie
+
+    # check if add 'O' to possible position, is it a winning board? Return move
+
+    # check if x is added to any of the possible positions, would player win? Return move
+
+    # return random corner position if available
+
+    # check if center position is available
+
+    # return a random move if no better move is found
 
 
-def is_board_full():
+def is_board_full(board):
     """
     Checks if the main board has any available moves
+    @:param: The board against which moves are being checked
     :return: True if the board has no more moves, False otherwise
     """
 
@@ -141,6 +161,25 @@ def does_player_want_to_play_again():
     """
     player_input = input("Do you want to play again? (y/n) ")
     return player_input == "y"
+
+
+def print_board(board_to_print):
+    """
+    Prints the board as it stands with all positions filled
+    :return: None
+    """
+    print(blank + blank + blank + bar + blank + blank + blank + bar)
+    print(blank + board_to_print[1] + blank + bar + blank + board_to_print[2] + blank + bar + blank + board_to_print[3])
+    print(blank + blank + blank + bar + blank + blank + blank + bar)
+    print(dash * 11)
+    print(blank + blank + blank + bar + blank + blank + blank + bar)
+    print(blank + board_to_print[4] + blank + bar + blank + board_to_print[5] + blank + bar + blank + board_to_print[6])
+    print(blank + blank + blank + bar + blank + blank + blank + bar)
+    print(dash * 11)
+    print(blank + blank + blank + bar + blank + blank + blank + bar)
+    print(blank + board_to_print[7] + blank + bar + blank + board_to_print[8] + blank + bar + blank + board_to_print[9])
+    print(blank + blank + blank + bar + blank + blank + blank + bar)
+    return
 
 
 def is_winning_board(possible_board, letter):
@@ -180,26 +219,7 @@ def is_winning_board(possible_board, letter):
     return False
 
 
-def print_board(board_to_print):
-    """
-    Prints the board as it stands with all positions filled
-    :return: None
-    """
-    print(blank + blank + blank + bar + blank + blank + blank + bar)
-    print(blank + board_to_print[1] + blank + bar + blank + board_to_print[2] + blank + bar + blank + board_to_print[3])
-    print(blank + blank + blank + bar + blank + blank + blank + bar)
-    print(dash * 11)
-    print(blank + blank + blank + bar + blank + blank + blank + bar)
-    print(blank + board_to_print[4] + blank + bar + blank + board_to_print[5] + blank + bar + blank + board_to_print[6])
-    print(blank + blank + blank + bar + blank + blank + blank + bar)
-    print(dash * 11)
-    print(blank + blank + blank + bar + blank + blank + blank + bar)
-    print(blank + board_to_print[7] + blank + bar + blank + board_to_print[8] + blank + bar + blank + board_to_print[9])
-    print(blank + blank + blank + bar + blank + blank + blank + bar)
-    return
-
-
-def reset_board():
+def generate_board():
     """
     @:return A new board that is all blank
     """
@@ -218,19 +238,26 @@ def starting_message():
     print("\n\n")
 
 
-def run_round():
+# ________________________________ Methods to run game ________________________________________________________
+
+
+def run_round(board):
     """
     Runs a round of tic tac toe
     """
     pass
 
 
-if __name__ == '__main__':
+def play_game():
     starting_message()
     play_again = True
     while play_again:
-        board = reset_board()
+        board = generate_board()
         print_board(board)
-        run_round()
+        run_round(board)
         play_again = does_player_want_to_play_again()
     print("Thanks for playing!")
+
+
+if __name__ == '__main__':
+    play_game()
