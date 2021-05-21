@@ -1,0 +1,7 @@
+WhatName = "WhatName"
+PlayTicTacToe = "PlayTicTacToe"
+PlayRockPaperScissors = "PlayRockPaperScissors"
+GetFeeling = "GetFeeling"
+FavoriteSubject = "FavoriteSubject"
+Goodbye = "Goodbye"
+WhatGame = "WhatGame"
